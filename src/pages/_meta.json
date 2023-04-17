@@ -1,11 +1,10 @@
 {
   "index": "Introduction",
   "basic-data-structures": "Basic Data Structures",
-  "time-complexities": "Time Complexities",
   "spearator": {
     "type": "separator"
   },
-  "advanced": "Advanced (A Folder)",
+
   "about": {
     "title": "About",
     "type": "page"
