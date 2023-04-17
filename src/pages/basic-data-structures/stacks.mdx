@@ -1,0 +1,106 @@
+import { Callout } from 'nextra-theme-docs';
+
+## Stacks
+
+Stacks are the data structures that follows Last-In-First-Out principle, which means
+
+- If we want to add new element, we should add to the last of the array. _(The added element now becomes the new `FIRST` element)_
+- If we want to remove a element, we should remove the first element. _(Here, first element means `stack[stack.length-1]` )_
+
+#### Example of Stack
+
+
+```python filename="stacks.py" copy
+stack = [1, 2, 3]
+
+# Adding element to stack (Last In)
+stack.append(4)  # [1,2,3,4]
+
+# Removing items from stack (First out)
+stack.pop()  # [1,2,3]
+
+```
+
+#### Forbidden random access in stack
+<Callout type='warning' emoji="⚠️">
+  Since stack is itself a list, it is possible to do something like `stack[2]` for random access. But doing so is highly discouraged in stack.
+</Callout>
+In stacks, we are not allowed for random access. E.g. `stack[2]` is a bad practice if we want to read the third element from `stack = [1, 2, 3, 4]`. So we should remove all the elements if want access to specifix element in _x_ position
+
+```python filename="random_access.py" copy {8,9}
+# Get the element in nth index from a stack
+
+
+def random_access(stack: List[int], index: int) -> int:
+
+    if(n >= len(stack)) return 0
+
+    for i in range(len(stack) - index - 1):
+        stack.pop()
+
+    return stack[-1]
+
+print(random_access([1, 2, 3, 4, 5], 3))  # 4
+
+```
+
+
+
+<Callout type='info' emoji="ℹ️">
+  In `for loop`, we are removing element from last following `Last-In-First-Out` principle and the last element after `for loop` is what we are looking for.
+</Callout>
+
+## Questions
+
+### [1. Valid Parenthesis](https://leetcode.com/problems/valid-parentheses/ "LeetCode")
+**Explanation:**
+
+&emsp;Given the input string `s` containing just the letters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, Check if the input string is valid. Input string is valid if:
+- Open brackets must be closed by the same type of brackets. E.g. `string = '(){}[]'` or `string = '({[]})'`
+
+**Example 1:**
+```
+Input: s = "()"
+Output: true
+```
+**Example 2:**
+```
+Input: s = "()[]{}"
+Output: true
+```
+**Example 3:**
+```
+Input: s = "(]"
+Output: false
+```
+
+**Solution:**
+
+```python filename="valid_parenthesis.py" copy
+def is_valid_parenthesis(string: str) -> bool:
+    stack = []
+
+    for char in string:
+
+        if char in "{([":
+            stack.append(char)
+
+        else:
+            if not stack:
+                return False
+            if char == ')' and stack[-1] == '(':
+                stack.pop()
+            elif char == '}' and stack[-1] == '{':
+                stack.pop()
+            elif char == ']' and stack[-1] == '[':
+                stack.pop()
+            else:
+                return False
+    return not stack
+
+
+print(is_valid_parenthesis("[{()}]"))  # True
+print(is_valid_parenthesis("[(]{)}"))  # False
+
+
+```

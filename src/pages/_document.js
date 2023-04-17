@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html>
+    <Html style={{ scrollBehavior: "smooth" }}>
       <Head>
         <link rel="shortcut icon" href="/static/favicon.png" />
       </Head>
