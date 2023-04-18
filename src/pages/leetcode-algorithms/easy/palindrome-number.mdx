@@ -1,0 +1,54 @@
+import Tags from "../../../components/Tags";
+
+## Palindrome Number
+
+<Tags array={["# Stack","# Easy"]} />
+
+Given an integer `n`, return `true` if `n` is a _palindrome_,and `false` otherwise.
+
+### Situation
+- We are not allowed to convert `integer` into a `string`.
+- Reversing the number directly itself and storing in memory might cause `integer overflow` problem.
+- Negative numbers `-121` will never be palindrome.
+- If the last digit is `0`: `120`, to be palindrome, first digit should also be `0`, but there are no numbers starting from `0`. So, any numbers ending with 0 are not palindrome.
+- If the length of `n` is odd number, for e.g. `12321`, we can remove the middle digit and change it to `1221`
+
+#### Example 1
+```
+Input: x = 121
+Output: true
+```
+#### Example 2
+```
+Input: x = -121
+Output: false
+```
+#### Example 3
+
+```
+Input: x = 10
+Output: false
+```
+
+### Solution
+What if we only revert the half of the number. After all, the reverse of last half of the number is equal to the remaining first half. If we have number `12321`, the last half reversed will be `123` and remaining first half will be `123`. So, `first_half == last_half`.
+
+```python copy filename="palindrome_number.py"
+def palindrome_number(num: int) -> bool:
+
+    if (num < 0 or (num % 10 == 0 and num != 0)):
+        print("First false")
+        return False
+
+    reverted_number = 0
+
+    while (num > reverted_number):
+        reverted_number = reverted_number * 10 + num % 10
+        num = math.floor(num / 10)
+
+    return num == reverted_number or num == math.floor(reverted_number/10)
+
+
+print(palindrome_number(12321))  # True
+print(palindrome_number(1232))  # False
+```

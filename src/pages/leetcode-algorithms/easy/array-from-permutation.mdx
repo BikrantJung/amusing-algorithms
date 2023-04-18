@@ -1,0 +1,46 @@
+import Tags from "../../../components/Tags";
+import { Callout } from 'nextra-theme-docs';
+
+## [1920. Build Array from Permutation](https://leetcode.com/problems/build-array-from-permutation/ "Leetcode")
+<Tags array={["# Array"]} />
+
+Given an array `arr` of _distinct_ elements from `0 to n-1`, build another array `result` of same length where `result[i] = nums[nums[i]]`. Input: `[0,5,4,2,3,1]`
+
+### Situation
+- The element of array must be continuous. It cannot be random such as `[3,6,3,6,12,7]`
+- All element in the array must be unique.E.g. `[0,5,4,2,3,1]`
+
+#### Example 1
+```
+Input: nums = [0,2,1,5,3,4]
+Output: [0,1,2,4,5,3]
+Explanation: The array ans is built as follows: 
+ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+    = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]
+    = [0,1,2,4,5,3]
+```
+#### Example 2
+```
+Input: nums = [5,0,1,2,3,4]
+Output: [4,5,0,1,2,3]
+Explanation: The array ans is built as follows:
+ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+    = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]
+    = [4,5,0,1,2,3]
+```
+<Callout type='info' emoji="ℹ️">
+  Can you solve it without using an extra space (i.e., `O(1)` memory)?
+</Callout>
+> Note: `O(1)` memory and `O(1)` time complexity are different.
+
+### Solution
+
+```python copy filename='array_from_permutation.py'
+def array_from_permutation(nums: List[int]) -> List[int]:
+    # No extra memory needed. i.e. O(1) memory
+    return [nums[i] for i in nums]
+
+
+print(array_from_permutation([0, 2, 1, 5, 3, 4]))  # [0, 1, 2, 4, 5, 3]
+print(array_from_permutation([5, 0, 1, 2, 3, 4]))  # [4, 5, 0, 1, 2, 3]
+```

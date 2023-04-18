@@ -1,10 +1,7 @@
 {
   "index": "Introduction",
   "basic-data-structures": "Basic Data Structures",
-  "spearator": {
-    "type": "separator"
-  },
-
+  "leetcode-algorithms": "Leetcode Algorithms",
   "about": {
     "title": "About",
     "type": "page"
